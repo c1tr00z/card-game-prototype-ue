@@ -1,0 +1,3 @@
+[submodule "Plugins/AssistLibUEAll"]
+	path = Plugins/AssistLibUEAll
+	url = git@github.com:c1tr00z/assist-lib-ue-all-in-one.git
