@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType)
 class CARDGAMEPROTOTYPEUE_API UCGPGameInstance : public UAssistLibGameInstance
 {
 	GENERATED_BODY()

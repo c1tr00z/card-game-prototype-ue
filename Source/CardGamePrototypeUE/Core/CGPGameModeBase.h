@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Modules/GameModeModules.h"
 #include "CGPGameModeBase.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class CARDGAMEPROTOTYPEUE_API ACGPGameModeBase : public AGameModeBase
+class CARDGAMEPROTOTYPEUE_API ACGPGameModeBase : public AGameModeModules
 {
 	GENERATED_BODY()
 	
