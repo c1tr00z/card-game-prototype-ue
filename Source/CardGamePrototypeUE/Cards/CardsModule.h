@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "CardDataRow.h"
 #include "CardDBEntry.h"
+#include "CardsModuleSettings.h"
 #include "CardGamePrototypeUE/Effects/EffectParametersBase.h"
 #include "Engine/DataTable.h"
 #include "Modules/AssistLibModule.h"
@@ -17,10 +18,11 @@ UCLASS(Blueprintable)
 class CARDGAMEPROTOTYPEUE_API ACardsModule : public AAssistLibModule
 {
 	GENERATED_BODY()
+
+private:
+	UCardsModuleSettings* Settings;
 	
 public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UDataTable* CardsTable;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TArray<FString> CardsNames;
@@ -28,7 +30,12 @@ public:
 	TMap<FString, TArray<FEffectParametersBase>> CardsEffects;
 
 private:
+	
 	TArray<FEffectParametersBase> LoadEffects(FCardDataRow DataRow);
+
+	UCardsModuleSettings* GetSettings();
+
+	UDataTable* GetCardsTable();
 
 protected:
 	virtual void BeginPlay() override;

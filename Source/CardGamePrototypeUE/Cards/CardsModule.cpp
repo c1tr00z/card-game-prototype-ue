@@ -5,6 +5,7 @@
 
 #include "CardGamePrototypeUE/Effects/EffectsDeserializer.h"
 #include "Common/ReflectionFunctions.h"
+#include "DB/DBFunctions.h"
 
 TArray<FEffectParametersBase> ACardsModule::LoadEffects(FCardDataRow DataRow) {
 	auto Reader = TJsonReaderFactory<>::Create(DataRow.JsonString);
@@ -22,6 +23,7 @@ TArray<FEffectParametersBase> ACardsModule::LoadEffects(FCardDataRow DataRow) {
 		auto StructClass = UReflectionFunctions::GetUStructByName(EffectJson->GetStringField("ClassName"));
 		if (StructClass == nullptr)
 		{
+			UE_LOG(LogTemp, Error, TEXT("No struct with name : %s"), *EffectJson->GetStringField("ClassName"));
 			continue;
 		}
 
@@ -32,15 +34,39 @@ TArray<FEffectParametersBase> ACardsModule::LoadEffects(FCardDataRow DataRow) {
 	return EffectParameters;
 }
 
+UCardsModuleSettings* ACardsModule::GetSettings() {
+	if (Settings == nullptr) {
+		Settings = UDBFunctions::GetByClass<UCardsModuleSettings>(GetWorld());
+	}
+
+	return Settings;
+}
+
+UDataTable* ACardsModule::GetCardsTable() {
+	if (!IsValid(GetSettings())) {
+		return nullptr;
+	}
+
+	return GetSettings()->CardsTable;
+}
+
 void ACardsModule::BeginPlay() {
 	Super::BeginPlay();
 
+	const auto CardsTable = GetCardsTable();
+	if (CardsTable == nullptr) {
+		UE_LOG(LogTemp, Error, TEXT("NO CARDS TABLE ASSIGNED"));
+		return;
+	}
 	TArray<FName> RowNames = CardsTable->GetRowNames();
+	UE_LOG(LogTemp, Warning, TEXT("Rows : %d"), CardsTable->GetRowNames().Num());
 	for (auto RowName : RowNames)
 	{
 		auto Row = CardsTable->FindRow<FCardDataRow>(RowName, "");
+		UE_LOG(LogTemp, Warning, TEXT("%s :: Json: %s"), *RowName.ToString(), *Row->JsonString);
 		CardsNames.Add(RowName.ToString());
 		CardsEffects.Add(RowName.ToString(), LoadEffects(*Row));
+		UE_LOG(LogTemp, Warning, TEXT("%s ::: %d"), *RowName.ToString(), LoadEffects(*Row).Num());
 	}
 }
 

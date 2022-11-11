@@ -3,6 +3,6 @@
 #include "EffectParametersBase.generated.h"
 
 USTRUCT(BlueprintType)
-struct FEffectParametersBase {
+struct CARDGAMEPROTOTYPEUE_API FEffectParametersBase {
 	GENERATED_BODY()
 };
