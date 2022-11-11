@@ -10,7 +10,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class CARDGAMEPROTOTYPEUE_API AEffectsModule : public AAssistLibModule
 {
 	GENERATED_BODY()
@@ -19,8 +19,10 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TArray<AEffectProcessorBase*> EffectProcessors;
 
-public:
+protected:
 	virtual void BeginPlay() override;
+
+public:
 
 	UFUNCTION(BlueprintCallable)
 	AEffectProcessorBase* GetProcessor(FEffectParametersBase Parameters) const;
