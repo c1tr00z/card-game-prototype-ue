@@ -15,6 +15,9 @@ class CARDGAMEPROTOTYPEUE_API UCardDBEntry : public UDBEntry {
 
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int EnergyPrice;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UTexture* Illustration;
 
 };

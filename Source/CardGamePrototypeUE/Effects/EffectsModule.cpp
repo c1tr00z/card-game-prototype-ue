@@ -17,6 +17,7 @@ void AEffectsModule::BeginPlay() {
 		{
 			continue;
 		}
+		UE_LOG(LogTemp, Warning, TEXT("Effect Processor [%s] Initialized"), *EffectProcessor->GetName());
 		EffectProcessors.Add(EffectProcessor);
 	}
 }
