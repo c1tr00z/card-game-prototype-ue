@@ -10,7 +10,10 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"AssistLibUEAllRuntime"
+				"AssistLibUEAllRuntime",
+				"Slate",
+				"SlateCore",
+				"UMG"
 			]
 		}
 	],
