@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class CARDGAMEPROTOTYPEUE_API UCardDBEntry : public UDBEntry {
 	GENERATED_BODY()
 

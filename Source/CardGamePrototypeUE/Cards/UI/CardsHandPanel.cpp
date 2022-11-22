@@ -10,7 +10,6 @@ void UCardsHandPanel::RefreshHandLayout(TArray<UPanelSlot*> AllSlots) {
 	auto SlotsAmount = AllSlots.Num();
 	//cards.Count / 2 * _spacing - _spacing * ((cards.Count + 1) % 2) / 2;
 	auto StartAngle = DefaultAngleOffset + SlotsAmount / 2 * AngleStep - AngleStep * ((SlotsAmount + 1) % 2) / 2;
-	UE_LOG(LogTemp, Warning, TEXT("Start Angle : %f"), StartAngle);
 	FVector2D LastPosition;
 	for (int SlotIndex = 0; SlotIndex < SlotsAmount; SlotIndex++) {
 		auto Slot = AllSlots[SlotIndex];
@@ -21,12 +20,10 @@ void UCardsHandPanel::RefreshHandLayout(TArray<UPanelSlot*> AllSlots) {
 		CanvasSlot->SetAnchors(FAnchors(0.5f, 1));
 		CanvasSlot->SetAlignment(FVector2D(0.5, 1));
 		auto Angle = StartAngle - AngleStep * SlotIndex;
-		UE_LOG(LogTemp, Warning, TEXT("Angle[%d] : %f"), SlotIndex, Angle);
 		auto AngleRad = FMath::DegreesToRadians(Angle);
-		auto Position = FVector2D(Radius * FMath::Cos(AngleRad), Radius * FMath::Sin(AngleRad));
+		auto Position = FVector2D(Radius * FMath::Cos(AngleRad), Radius * FMath::Sin(AngleRad)) + Offset;
 		CanvasSlot->SetPosition(Position);
 		LastPosition = Position;
-		UE_LOG(LogTemp, Warning, TEXT("Position[%d] : %s"), SlotIndex, *Position.ToString());
 		auto Widget = CanvasSlot->Content;
 		auto WidgetTransform = Widget->RenderTransform;
 		WidgetTransform.Angle = Angle - DefaultAngleOffset;
@@ -50,4 +47,9 @@ void UCardsHandPanel::OnSlotRemoved(UPanelSlot* InSlot) {
 	}
 	RefreshHandLayout(AllSlots);
 	Super::OnSlotRemoved(InSlot);
+}
+
+void UCardsHandPanel::OnWidgetRebuilt() {
+	RefreshHandLayout(GetSlots());
+	Super::OnWidgetRebuilt();
 }

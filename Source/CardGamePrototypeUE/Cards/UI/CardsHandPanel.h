@@ -25,11 +25,17 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float DefaultAngleOffset = 90;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector2D Offset;
+
 private:
 	void RefreshHandLayout(TArray<UPanelSlot*> AllSlots);
 	
 public:
+
 	virtual void OnSlotAdded(UPanelSlot* InSlot) override;
 
 	virtual void OnSlotRemoved(UPanelSlot* InSlot) override;
+
+	virtual void OnWidgetRebuilt() override;
 };
