@@ -48,11 +48,22 @@ bool ULifeComponent::IsAlive() const {
 }
 
 void ULifeComponent::Damage(int Value) {
-	DamageValue += Value;
+	DamageValue = FMath::Min(DamageValue + Value, MaxHP);
 	auto isAlive = IsAlive();
 	OnDamaged(!isAlive);
 	if (!IsAlive()) {
 		OnDied();
 	}
+}
+
+void ULifeComponent::Heal(int Value) {
+	if (!IsAlive()) {
+		return;
+	}
+	DamageValue = FMath::Max(0, DamageValue - Value);
+}
+
+void ULifeComponent::AddArmor(int Value) {
+	Armor += Value;
 }
 

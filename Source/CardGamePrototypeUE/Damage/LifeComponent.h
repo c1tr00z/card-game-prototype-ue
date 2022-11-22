@@ -14,6 +14,8 @@ class CARDGAMEPROTOTYPEUE_API ULifeComponent : public UActorComponent {
 private: 
 	int MaxHP;
 	int DamageValue;
+
+	int Armor;
 	
 public:
 	// Sets default values for this component's properties
@@ -41,4 +43,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Damage(int Value);
+
+	UFUNCTION(BlueprintCallable)
+	void Heal(int Value);
+
+	UFUNCTION(BlueprintCallable)
+	void AddArmor(int Value);
 };
