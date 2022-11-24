@@ -50,7 +50,7 @@ FString AEffectsModule::GetLocalizedString(FEffectParametersBase Parameters) con
 	if (Processor == nullptr)
 	{
 		UE_LOG(LogTemp, Error, TEXT("[Localization] No processor was found for %s"), *Parameters.StaticStruct()->GetName());
-		return;
+		return FString("");
 	}
 
 	return Processor->GetLocalizedString(Parameters);
