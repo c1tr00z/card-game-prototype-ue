@@ -8,11 +8,11 @@
 void AEffectsModule::BeginPlay() {
 	Super::BeginPlay();
 
-	TArray<UClass*> ProcessorsClasses = UReflectionFunctions::GetSubclassesOf(AEffectProcessorBase::StaticClass(), false);
+	TArray<UClass*> ProcessorsClasses = UReflectionFunctions::GetSubclassesOf(UEffectProcessorBase::StaticClass(), false);
 
 	for (auto ProcessorsClass : ProcessorsClasses)
 	{
-		auto EffectProcessor = Cast<AEffectProcessorBase>(GetWorld()->SpawnActor(ProcessorsClass));
+		UEffectProcessorBase* EffectProcessor = NewObject<UEffectProcessorBase>(GetTransientPackage(), ProcessorsClass);
 		if (EffectProcessor == nullptr)
 		{
 			continue;
@@ -22,7 +22,7 @@ void AEffectsModule::BeginPlay() {
 	}
 }
 
-AEffectProcessorBase* AEffectsModule::GetProcessor(FEffectParametersBase Parameters) const {
+UEffectProcessorBase* AEffectsModule::GetProcessor(FEffectParametersBase Parameters) const {
 	for (auto EffectProcessor : EffectProcessors)
 	{
 		if (EffectProcessor->GetParametersUStruct() == Parameters.StaticStruct())

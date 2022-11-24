@@ -18,4 +18,6 @@ class CARDGAMEPROTOTYPEUE_API UCardsModuleSettings : public UDBEntry {
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UDataTable* CardsTable;
+
+	
 };

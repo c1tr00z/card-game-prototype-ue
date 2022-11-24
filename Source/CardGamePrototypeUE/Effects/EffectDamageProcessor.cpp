@@ -5,11 +5,11 @@
 
 #include "EffectDamageParameters.h"
 
-UStruct* AUEffectDamageProcessor::GetParametersUStruct() {
+UStruct* UEffectDamageProcessor::GetParametersUStruct() {
 	return FEffectDamageParameters::StaticStruct();
 }
 
-void AUEffectDamageProcessor::PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) {
+void UEffectDamageProcessor::PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) {
 	if (Parameters.StaticStruct() != GetParametersUStruct()) {
 		return;
 	}
@@ -19,5 +19,3 @@ void AUEffectDamageProcessor::PlayEffect(FEffectParametersBase Parameters, ACGPC
 
 	Target->GetLife()->Damage(MyParameters.DamageValue);
 }
-
-

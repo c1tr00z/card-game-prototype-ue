@@ -17,7 +17,7 @@ class CARDGAMEPROTOTYPEUE_API AEffectsModule : public AAssistLibModule
 
 public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
-	TArray<AEffectProcessorBase*> EffectProcessors;
+	TArray<UEffectProcessorBase*> EffectProcessors;
 
 protected:
 	virtual void BeginPlay() override;
@@ -25,7 +25,7 @@ protected:
 public:
 
 	UFUNCTION(BlueprintCallable)
-	AEffectProcessorBase* GetProcessor(FEffectParametersBase Parameters) const;
+	UEffectProcessorBase* GetProcessor(FEffectParametersBase Parameters) const;
 
 	UFUNCTION(BlueprintCallable)
 	void PlayEffectParameters(FEffectParametersBase Parameters, ACGPCharacterBase* Target) const;

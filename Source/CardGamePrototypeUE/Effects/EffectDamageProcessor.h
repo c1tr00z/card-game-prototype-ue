@@ -10,7 +10,7 @@
  * 
  */
 UCLASS(Blueprintable)
-class CARDGAMEPROTOTYPEUE_API AUEffectDamageProcessor : public AEffectProcessorBase {
+class CARDGAMEPROTOTYPEUE_API UEffectDamageProcessor : public UEffectProcessorBase {
 	GENERATED_BODY()
 	
 public:
