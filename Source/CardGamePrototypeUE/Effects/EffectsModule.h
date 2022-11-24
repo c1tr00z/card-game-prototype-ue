@@ -29,4 +29,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void PlayEffectParameters(FEffectParametersBase Parameters, ACGPCharacterBase* Target) const;
+
+	//TEMP solution for localization. Will be changed
+	UFUNCTION(BlueprintPure)
+	FString GetLocalizedString(FEffectParametersBase Parameters) const;
 };

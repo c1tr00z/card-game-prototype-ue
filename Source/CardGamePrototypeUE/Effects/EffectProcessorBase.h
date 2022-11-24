@@ -21,4 +21,8 @@ public:
 public:
 	UFUNCTION(BlueprintCallable)
 	virtual void PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target);
+
+	//TEMP solution for localization. Will be changed
+	UFUNCTION(BlueprintPure)
+	virtual FString GetLocalizedString(FEffectParametersBase Parameters);
 };

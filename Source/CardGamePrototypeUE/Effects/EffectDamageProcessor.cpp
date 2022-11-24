@@ -19,3 +19,14 @@ void UEffectDamageProcessor::PlayEffect(FEffectParametersBase Parameters, ACGPCh
 
 	Target->GetLife()->Damage(MyParameters.DamageValue);
 }
+
+FString UEffectDamageProcessor::GetLocalizedString(FEffectParametersBase Parameters) {
+	if (Parameters.StaticStruct() != GetParametersUStruct()) {
+		return FString("");
+	}
+
+	const auto PreCasted = static_cast<FEffectDamageParameters*>(&Parameters);
+	FStringFormatOrderedArguments args;
+	args.Add(FStringFormatArg(PreCasted->DamageValue));
+	return FString::Format(TEXT("Deal {0} damage"), args);
+}

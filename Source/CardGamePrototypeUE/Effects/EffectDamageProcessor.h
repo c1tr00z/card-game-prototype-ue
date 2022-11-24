@@ -17,4 +17,6 @@ public:
 	virtual UStruct* GetParametersUStruct() override;
 
 	virtual void PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) override;
+
+	virtual FString GetLocalizedString(FEffectParametersBase Parameters) override;
 };

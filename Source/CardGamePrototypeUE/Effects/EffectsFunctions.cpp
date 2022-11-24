@@ -20,3 +20,15 @@ void UEffectsFunctions::PlayEffect(UWorld* World, FEffectParametersBase Paramete
 
 	Module->PlayEffectParameters(Parameters, Target);
 }
+
+FString UEffectsFunctions::GetLocalizedString(UWorld* World, FEffectParametersBase Parameters) {
+	auto Module = GetEffectsModule(World);
+	
+	if (Module == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("[Localization] No effects module was found"));
+		return FString("");
+	}
+
+	return Module->GetLocalizedString(Parameters);
+}

@@ -44,3 +44,14 @@ void AEffectsModule::PlayEffectParameters(FEffectParametersBase Parameters, ACGP
 	}
 	Processor->PlayEffect(Parameters, Target);
 }
+
+FString AEffectsModule::GetLocalizedString(FEffectParametersBase Parameters) const {
+	auto Processor = GetProcessor(Parameters);
+	if (Processor == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("[Localization] No processor was found for %s"), *Parameters.StaticStruct()->GetName());
+		return;
+	}
+
+	return Processor->GetLocalizedString(Parameters);
+}

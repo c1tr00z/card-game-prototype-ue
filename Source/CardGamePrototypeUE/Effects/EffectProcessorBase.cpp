@@ -16,3 +16,7 @@ void UEffectProcessorBase::PlayEffect(FEffectParametersBase Parameters, ACGPChar
 	
 }
 
+FString UEffectProcessorBase::GetLocalizedString(FEffectParametersBase Parameters) {
+	return FString("");
+}
+
