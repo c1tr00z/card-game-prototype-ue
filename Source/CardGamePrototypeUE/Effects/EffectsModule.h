@@ -33,4 +33,6 @@ public:
 	//TEMP solution for localization. Will be changed
 	UFUNCTION(BlueprintPure)
 	FString GetLocalizedString(FEffectParametersBase Parameters) const;
+
+	int GetPositiveNegativeIndex(FEffectParametersBase Parameters) const;
 };

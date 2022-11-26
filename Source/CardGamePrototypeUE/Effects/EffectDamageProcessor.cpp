@@ -30,3 +30,7 @@ FString UEffectDamageProcessor::GetLocalizedString(FEffectParametersBase Paramet
 	args.Add(FStringFormatArg(PreCasted->DamageValue));
 	return FString::Format(TEXT("Deal {0} damage"), args);
 }
+
+int UEffectDamageProcessor::GetPositiveNegativeIndex() {
+	return -1;
+}

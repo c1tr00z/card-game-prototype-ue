@@ -4,6 +4,7 @@
 #include "CardsModule.h"
 
 #include "CardGamePrototypeUE/Effects/EffectsDeserializer.h"
+#include "CardGamePrototypeUE/Effects/EffectsFunctions.h"
 #include "Common/ReflectionFunctions.h"
 #include "DB/DBFunctions.h"
 
@@ -81,4 +82,24 @@ TArray<FEffectParametersBase> ACardsModule::GetEffects(UCardDBEntry* CardDBEntry
 		return TArray<FEffectParametersBase>();
 	}
 	return CardsEffects[BulletName];
+}
+
+int ACardsModule::GetPositiveNegativeIndex(UCardDBEntry* CardDBEntry) {
+	auto Parameters = GetEffects(CardDBEntry);
+
+	int Index = 0;
+
+	for (auto Parameter : Parameters) {
+		Index += UEffectsFunctions::GetPositiveNegativeIndex(GetWorld(), Parameter);
+	}
+
+	return Index;
+}
+
+void ACardsModule::PlayCard(UCardDBEntry* CardDBEntry, ACGPCharacterBase* Target) {
+	auto Parameters = GetEffects(CardDBEntry);
+	
+	for (auto Parameter : Parameters) {
+		UEffectsFunctions::PlayEffect(GetWorld(), Parameter, Target);
+	}
 }

@@ -55,3 +55,13 @@ FString AEffectsModule::GetLocalizedString(FEffectParametersBase Parameters) con
 
 	return Processor->GetLocalizedString(Parameters);
 }
+
+int AEffectsModule::GetPositiveNegativeIndex(FEffectParametersBase Parameters) const {
+	const auto Processor = GetProcessor(Parameters);
+	if (Processor == nullptr) {
+	    UE_LOG(LogTemp, Error, TEXT("No processor was found for %s"), *Parameters.StaticStruct()->GetName());
+	    return 0;
+	}
+
+	return Processor->GetPositiveNegativeIndex();
+}

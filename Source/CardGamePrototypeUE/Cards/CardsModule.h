@@ -6,6 +6,7 @@
 #include "CardDataRow.h"
 #include "CardDBEntry.h"
 #include "CardsModuleSettings.h"
+#include "CardGamePrototypeUE/Characters/CGPCharacterBase.h"
 #include "CardGamePrototypeUE/Effects/EffectParametersBase.h"
 #include "Engine/DataTable.h"
 #include "Modules/AssistLibModule.h"
@@ -43,4 +44,10 @@ protected:
 public:
 	UFUNCTION(BlueprintCallable)
 	TArray<FEffectParametersBase> GetEffects(UCardDBEntry* CardDBEntry);
+
+	UFUNCTION(BlueprintPure)
+	int GetPositiveNegativeIndex(UCardDBEntry* CardDBEntry);
+
+	UFUNCTION(BlueprintCallable)
+	void PlayCard(UCardDBEntry* CardDBEntry, ACGPCharacterBase* Target);
 };

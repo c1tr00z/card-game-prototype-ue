@@ -20,3 +20,7 @@ FString UEffectProcessorBase::GetLocalizedString(FEffectParametersBase Parameter
 	return FString("");
 }
 
+int UEffectProcessorBase::GetPositiveNegativeIndex() {
+	return 0;
+}
+

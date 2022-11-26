@@ -32,3 +32,15 @@ FString UEffectsFunctions::GetLocalizedString(UWorld* World, FEffectParametersBa
 
 	return Module->GetLocalizedString(Parameters);
 }
+
+int UEffectsFunctions::GetPositiveNegativeIndex(UWorld* World, FEffectParametersBase Parameters) {
+	auto Module = GetEffectsModule(World);
+	
+	if (Module == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No effects module was found"));
+		return 0;
+	}
+
+	return Module->GetPositiveNegativeIndex(Parameters);
+}

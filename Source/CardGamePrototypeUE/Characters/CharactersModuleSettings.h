@@ -3,19 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CardsAgentBase.h"
+#include "CGPCharacterBase.h"
 #include "CardGamePrototypeUE/Common/Side.h"
 #include "DB/DBEntry.h"
-#include "Engine/DataTable.h"
-#include "CardsModuleSettings.generated.h"
+#include "CharactersModuleSettings.generated.h"
 
 USTRUCT(BlueprintType)
-struct FCardAgentSettings {
+struct FCharactersSettings {
 	GENERATED_BODY()
-
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TSubclassOf<UCardsAgentBase> AgentClass;
+	TSubclassOf<ACGPCharacterBase> CharacterClass;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TEnumAsByte<ESide> Side;
@@ -25,13 +23,11 @@ public:
  * 
  */
 UCLASS()
-class CARDGAMEPROTOTYPEUE_API UCardsModuleSettings : public UDBEntry {
+class CARDGAMEPROTOTYPEUE_API UCharactersModuleSettings : public UDBEntry {
 	GENERATED_BODY()
 
 public:
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UDataTable* CardsTable;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TArray<FCardAgentSettings> AgentsSettings;
+	TArray<FCharactersSettings> CharactersSettings;
 };

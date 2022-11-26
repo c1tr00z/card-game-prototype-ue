@@ -25,4 +25,7 @@ public:
 	//TEMP solution for localization. Will be changed
 	UFUNCTION(BlueprintPure)
 	virtual FString GetLocalizedString(FEffectParametersBase Parameters);
+
+	UFUNCTION(BlueprintPure)
+	virtual int GetPositiveNegativeIndex();
 };

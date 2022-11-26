@@ -25,4 +25,7 @@ public:
 	//TEMP solution for localization. Will be changed
 	UFUNCTION(BlueprintPure)
 	static FString GetLocalizedString(UWorld* World, FEffectParametersBase Parameters);
+
+	UFUNCTION(BlueprintPure)
+	static int GetPositiveNegativeIndex(UWorld* World, FEffectParametersBase Parameters);
 };

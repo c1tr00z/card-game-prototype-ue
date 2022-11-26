@@ -19,4 +19,6 @@ public:
 	virtual void PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) override;
 
 	virtual FString GetLocalizedString(FEffectParametersBase Parameters) override;
+
+	virtual int GetPositiveNegativeIndex() override;
 };
