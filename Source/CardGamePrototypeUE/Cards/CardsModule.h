@@ -16,19 +16,21 @@
  * 
  */
 UCLASS(Blueprintable)
-class CARDGAMEPROTOTYPEUE_API ACardsModule : public AAssistLibModule
-{
+class CARDGAMEPROTOTYPEUE_API ACardsModule : public AAssistLibModule {
 	GENERATED_BODY()
 
 private:
 	UCardsModuleSettings* Settings;
+	
+	TMap<FString, TArray<FEffectParametersBase>> CardsEffects;
 	
 public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TArray<FString> CardsNames;
 
-	TMap<FString, TArray<FEffectParametersBase>> CardsEffects;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	TArray<UCardsAgentBase*> Agents;
 
 private:
 	

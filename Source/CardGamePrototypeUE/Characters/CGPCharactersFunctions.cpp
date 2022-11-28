@@ -6,7 +6,7 @@
 #include "Modules/ModulesFunctions.h"
 
 ACharactersModule* UCGPCharactersFunctions::GetCharactersModule(UWorld* World) {
-	UModulesFunctions::GetModule<ACharactersModule>(World);
+	return UModulesFunctions::GetModule<ACharactersModule>(World);
 }
 
 ACGPCharacterBase* UCGPCharactersFunctions::GetCharacterBySide(UWorld* World, TEnumAsByte<ESide> Side) {

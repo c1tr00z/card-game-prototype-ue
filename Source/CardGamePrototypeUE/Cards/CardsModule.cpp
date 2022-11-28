@@ -69,6 +69,13 @@ void ACardsModule::BeginPlay() {
 		CardsEffects.Add(RowName.ToString(), LoadEffects(*Row));
 		UE_LOG(LogTemp, Warning, TEXT("%s ::: %d"), *RowName.ToString(), LoadEffects(*Row).Num());
 	}
+
+	auto AgentsSettings = GetSettings()->AgentsSettings;
+	for (auto AgentSettings : AgentsSettings) {
+		auto Agent = NewObject<UCardsAgentBase>(GetTransientPackage(), AgentSettings.AgentClass);
+		Agent->Init(AgentSettings.Side, AgentSettings.Deck);
+		Agents.Add(Agent);
+	}
 }
 
 TArray<FEffectParametersBase> ACardsModule::GetEffects(UCardDBEntry* CardDBEntry) {

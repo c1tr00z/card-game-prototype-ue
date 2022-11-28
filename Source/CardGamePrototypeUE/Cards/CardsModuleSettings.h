@@ -19,6 +19,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TEnumAsByte<ESide> Side;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UDeckData* Deck;
 };
 
 /**
