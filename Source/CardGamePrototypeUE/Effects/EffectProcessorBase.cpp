@@ -24,3 +24,7 @@ int UEffectProcessorBase::GetPositiveNegativeIndex() {
 	return 0;
 }
 
+FEffectParametersBase UEffectProcessorBase::Deserialize(TSharedRef<FJsonObject> JsonObject) {
+	return FEffectParametersBase();
+}
+

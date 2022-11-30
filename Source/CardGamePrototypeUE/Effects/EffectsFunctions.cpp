@@ -44,3 +44,16 @@ int UEffectsFunctions::GetPositiveNegativeIndex(UWorld* World, FEffectParameters
 
 	return Module->GetPositiveNegativeIndex(Parameters);
 }
+
+FEffectParametersBase UEffectsFunctions::DeserializeFromJson(UWorld* World, TSharedRef<FJsonObject> JsonObject) {
+	auto Module = GetEffectsModule(World);
+	
+	if (Module == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No effects module was found"));
+		return FEffectParametersBase();
+	}
+
+	auto Processor = Module->GetProcessorByParametersStructName(JsonObject->GetStringField("ClassName"));
+	return Processor->Deserialize(JsonObject);
+}

@@ -4,6 +4,7 @@
 #include "EffectDamageProcessor.h"
 
 #include "EffectDamageParameters.h"
+#include "EffectsDeserializer.h"
 
 UStruct* UEffectDamageProcessor::GetParametersUStruct() {
 	return FEffectDamageParameters::StaticStruct();
@@ -33,4 +34,8 @@ FString UEffectDamageProcessor::GetLocalizedString(FEffectParametersBase Paramet
 
 int UEffectDamageProcessor::GetPositiveNegativeIndex() {
 	return -1;
+}
+
+FEffectParametersBase UEffectDamageProcessor::Deserialize(TSharedRef<FJsonObject> JsonObject) {
+	return EffectsDeserializer::DeserializeParameters<FEffectDamageParameters>(JsonObject, FEffectDamageParameters::StaticStruct());
 }

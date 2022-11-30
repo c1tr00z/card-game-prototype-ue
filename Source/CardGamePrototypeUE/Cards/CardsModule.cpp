@@ -21,12 +21,6 @@ TArray<FEffectParametersBase> ACardsModule::LoadEffects(FCardDataRow DataRow) {
 	for (TSharedPtr<FJsonValue, ESPMode::ThreadSafe> JsonValue : JsonValues)
 	{
 		auto EffectJson = JsonValue->AsObject();
-		auto StructClass = UReflectionFunctions::GetUStructByName(EffectJson->GetStringField("ClassName"));
-		if (StructClass == nullptr)
-		{
-			UE_LOG(LogTemp, Error, TEXT("No struct with name : %s"), *EffectJson->GetStringField("ClassName"));
-			continue;
-		}
 
 		auto Parameters = EffectsDeserializer::Deserialize(EffectJson.ToSharedRef());
 		EffectParameters.Add(Parameters);

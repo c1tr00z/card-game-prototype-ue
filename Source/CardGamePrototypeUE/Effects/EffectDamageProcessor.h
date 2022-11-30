@@ -21,4 +21,6 @@ public:
 	virtual FString GetLocalizedString(FEffectParametersBase Parameters) override;
 
 	virtual int GetPositiveNegativeIndex() override;
+
+	virtual FEffectParametersBase Deserialize(TSharedRef<FJsonObject> JsonObject) override;
 };

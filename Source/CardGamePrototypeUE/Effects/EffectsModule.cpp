@@ -35,6 +35,19 @@ UEffectProcessorBase* AEffectsModule::GetProcessor(FEffectParametersBase Paramet
 	return nullptr;
 }
 
+UEffectProcessorBase* AEffectsModule::GetProcessorByParametersStructName(FString StructName) const {
+	for (auto EffectProcessor : EffectProcessors)
+	{
+		if (EffectProcessor->GetParametersUStruct()->GetName() == StructName)
+		{
+			return EffectProcessor;
+		}
+	}
+
+	UE_LOG(LogTemp, Error, TEXT("[EFFECTS MODULE] No effect processor defined for %s"), *StructName);
+	return nullptr;
+}
+
 void AEffectsModule::PlayEffectParameters(FEffectParametersBase Parameters, ACGPCharacterBase* Target) const {
 	auto Processor = GetProcessor(Parameters);
 	if (Processor == nullptr)

@@ -28,4 +28,6 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	static int GetPositiveNegativeIndex(UWorld* World, FEffectParametersBase Parameters);
+
+	static FEffectParametersBase DeserializeFromJson(UWorld* World, TSharedRef<FJsonObject> JsonObject);
 };

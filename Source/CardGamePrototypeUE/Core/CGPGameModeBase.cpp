@@ -3,3 +3,6 @@
 
 #include "CGPGameModeBase.h"
 
+void ACGPGameModeBase::BeginPlay() {
+	Super::BeginPlay();
+}

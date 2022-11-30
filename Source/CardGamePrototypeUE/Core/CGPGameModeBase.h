@@ -15,4 +15,7 @@ class CARDGAMEPROTOTYPEUE_API ACGPGameModeBase : public AGameModeModules
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void BeginPlay() override;
+	
 };

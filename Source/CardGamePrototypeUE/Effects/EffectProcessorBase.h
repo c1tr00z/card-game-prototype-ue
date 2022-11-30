@@ -28,4 +28,6 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	virtual int GetPositiveNegativeIndex();
+
+	virtual FEffectParametersBase Deserialize(TSharedRef<FJsonObject> JsonObject);
 };

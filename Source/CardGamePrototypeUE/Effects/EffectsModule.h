@@ -24,8 +24,11 @@ protected:
 
 public:
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintPure)
 	UEffectProcessorBase* GetProcessor(FEffectParametersBase Parameters) const;
+
+	UFUNCTION(BlueprintPure)
+	UEffectProcessorBase* GetProcessorByParametersStructName(FString StructName) const;
 
 	UFUNCTION(BlueprintCallable)
 	void PlayEffectParameters(FEffectParametersBase Parameters, ACGPCharacterBase* Target) const;
