@@ -4,6 +4,7 @@
 #include "CardsModule.h"
 
 #include "CardGamePrototypeUE/Effects/EffectsDeserializer.h"
+#include "CardGamePrototypeUE/Effects/EffectsFunctions.h"
 #include "Common/ReflectionFunctions.h"
 #include "DB/DBFunctions.h"
 
@@ -20,12 +21,6 @@ TArray<FEffectParametersBase> ACardsModule::LoadEffects(FCardDataRow DataRow) {
 	for (TSharedPtr<FJsonValue, ESPMode::ThreadSafe> JsonValue : JsonValues)
 	{
 		auto EffectJson = JsonValue->AsObject();
-		auto StructClass = UReflectionFunctions::GetUStructByName(EffectJson->GetStringField("ClassName"));
-		if (StructClass == nullptr)
-		{
-			UE_LOG(LogTemp, Error, TEXT("No struct with name : %s"), *EffectJson->GetStringField("ClassName"));
-			continue;
-		}
 
 		auto Parameters = EffectsDeserializer::Deserialize(EffectJson.ToSharedRef());
 		EffectParameters.Add(Parameters);
@@ -68,6 +63,13 @@ void ACardsModule::BeginPlay() {
 		CardsEffects.Add(RowName.ToString(), LoadEffects(*Row));
 		UE_LOG(LogTemp, Warning, TEXT("%s ::: %d"), *RowName.ToString(), LoadEffects(*Row).Num());
 	}
+
+	auto AgentsSettings = GetSettings()->AgentsSettings;
+	for (auto AgentSettings : AgentsSettings) {
+		auto Agent = NewObject<UCardsAgentBase>(GetTransientPackage(), AgentSettings.AgentClass);
+		Agent->Init(AgentSettings.Side, AgentSettings.Deck);
+		Agents.Add(Agent);
+	}
 }
 
 TArray<FEffectParametersBase> ACardsModule::GetEffects(UCardDBEntry* CardDBEntry) {
@@ -81,4 +83,24 @@ TArray<FEffectParametersBase> ACardsModule::GetEffects(UCardDBEntry* CardDBEntry
 		return TArray<FEffectParametersBase>();
 	}
 	return CardsEffects[BulletName];
+}
+
+int ACardsModule::GetPositiveNegativeIndex(UCardDBEntry* CardDBEntry) {
+	auto Parameters = GetEffects(CardDBEntry);
+
+	int Index = 0;
+
+	for (auto Parameter : Parameters) {
+		Index += UEffectsFunctions::GetPositiveNegativeIndex(GetWorld(), Parameter);
+	}
+
+	return Index;
+}
+
+void ACardsModule::PlayCard(UCardDBEntry* CardDBEntry, ACGPCharacterBase* Target) {
+	auto Parameters = GetEffects(CardDBEntry);
+	
+	for (auto Parameter : Parameters) {
+		UEffectsFunctions::PlayEffect(GetWorld(), Parameter, Target);
+	}
 }

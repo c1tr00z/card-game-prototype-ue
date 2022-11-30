@@ -5,25 +5,29 @@
 #include "CoreMinimal.h"
 #include "EffectParametersBase.h"
 #include "CardGamePrototypeUE/Characters/CGPCharacterBase.h"
-#include "GameFramework/Actor.h"
 #include "EffectProcessorBase.generated.h"
 
 UCLASS(Abstract)
-class CARDGAMEPROTOTYPEUE_API AEffectProcessorBase : public AActor {
+class CARDGAMEPROTOTYPEUE_API UEffectProcessorBase : public UObject {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	AEffectProcessorBase();
+	UEffectProcessorBase();
 
 	UFUNCTION(BlueprintCallable)
 	virtual UStruct* GetParametersUStruct();
-	
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 public:
 	UFUNCTION(BlueprintCallable)
 	virtual void PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target);
+
+	//TEMP solution for localization. Will be changed
+	UFUNCTION(BlueprintPure)
+	virtual FString GetLocalizedString(FEffectParametersBase Parameters);
+
+	UFUNCTION(BlueprintPure)
+	virtual int GetPositiveNegativeIndex();
+
+	virtual FEffectParametersBase Deserialize(TSharedRef<FJsonObject> JsonObject);
 };

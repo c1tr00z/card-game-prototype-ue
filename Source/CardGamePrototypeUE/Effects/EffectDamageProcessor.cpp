@@ -4,12 +4,13 @@
 #include "EffectDamageProcessor.h"
 
 #include "EffectDamageParameters.h"
+#include "EffectsDeserializer.h"
 
-UStruct* AUEffectDamageProcessor::GetParametersUStruct() {
+UStruct* UEffectDamageProcessor::GetParametersUStruct() {
 	return FEffectDamageParameters::StaticStruct();
 }
 
-void AUEffectDamageProcessor::PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) {
+void UEffectDamageProcessor::PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) {
 	if (Parameters.StaticStruct() != GetParametersUStruct()) {
 		return;
 	}
@@ -20,4 +21,21 @@ void AUEffectDamageProcessor::PlayEffect(FEffectParametersBase Parameters, ACGPC
 	Target->GetLife()->Damage(MyParameters.DamageValue);
 }
 
+FString UEffectDamageProcessor::GetLocalizedString(FEffectParametersBase Parameters) {
+	if (Parameters.StaticStruct() != GetParametersUStruct()) {
+		return FString("");
+	}
 
+	const auto PreCasted = static_cast<FEffectDamageParameters*>(&Parameters);
+	FStringFormatOrderedArguments args;
+	args.Add(FStringFormatArg(PreCasted->DamageValue));
+	return FString::Format(TEXT("Deal {0} damage"), args);
+}
+
+int UEffectDamageProcessor::GetPositiveNegativeIndex() {
+	return -1;
+}
+
+FEffectParametersBase UEffectDamageProcessor::Deserialize(TSharedRef<FJsonObject> JsonObject) {
+	return EffectsDeserializer::DeserializeParameters<FEffectDamageParameters>(JsonObject, FEffectDamageParameters::StaticStruct());
+}

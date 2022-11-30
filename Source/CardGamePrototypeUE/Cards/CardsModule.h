@@ -6,6 +6,7 @@
 #include "CardDataRow.h"
 #include "CardDBEntry.h"
 #include "CardsModuleSettings.h"
+#include "CardGamePrototypeUE/Characters/CGPCharacterBase.h"
 #include "CardGamePrototypeUE/Effects/EffectParametersBase.h"
 #include "Engine/DataTable.h"
 #include "Modules/AssistLibModule.h"
@@ -15,19 +16,21 @@
  * 
  */
 UCLASS(Blueprintable)
-class CARDGAMEPROTOTYPEUE_API ACardsModule : public AAssistLibModule
-{
+class CARDGAMEPROTOTYPEUE_API ACardsModule : public AAssistLibModule {
 	GENERATED_BODY()
 
 private:
 	UCardsModuleSettings* Settings;
+	
+	TMap<FString, TArray<FEffectParametersBase>> CardsEffects;
 	
 public:
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TArray<FString> CardsNames;
 
-	TMap<FString, TArray<FEffectParametersBase>> CardsEffects;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	TArray<UCardsAgentBase*> Agents;
 
 private:
 	
@@ -43,4 +46,10 @@ protected:
 public:
 	UFUNCTION(BlueprintCallable)
 	TArray<FEffectParametersBase> GetEffects(UCardDBEntry* CardDBEntry);
+
+	UFUNCTION(BlueprintPure)
+	int GetPositiveNegativeIndex(UCardDBEntry* CardDBEntry);
+
+	UFUNCTION(BlueprintCallable)
+	void PlayCard(UCardDBEntry* CardDBEntry, ACGPCharacterBase* Target);
 };

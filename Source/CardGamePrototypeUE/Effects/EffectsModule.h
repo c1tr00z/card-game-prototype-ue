@@ -17,16 +17,25 @@ class CARDGAMEPROTOTYPEUE_API AEffectsModule : public AAssistLibModule
 
 public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
-	TArray<AEffectProcessorBase*> EffectProcessors;
+	TArray<UEffectProcessorBase*> EffectProcessors;
 
 protected:
 	virtual void BeginPlay() override;
 
 public:
 
-	UFUNCTION(BlueprintCallable)
-	AEffectProcessorBase* GetProcessor(FEffectParametersBase Parameters) const;
+	UFUNCTION(BlueprintPure)
+	UEffectProcessorBase* GetProcessor(FEffectParametersBase Parameters) const;
+
+	UFUNCTION(BlueprintPure)
+	UEffectProcessorBase* GetProcessorByParametersStructName(FString StructName) const;
 
 	UFUNCTION(BlueprintCallable)
 	void PlayEffectParameters(FEffectParametersBase Parameters, ACGPCharacterBase* Target) const;
+
+	//TEMP solution for localization. Will be changed
+	UFUNCTION(BlueprintPure)
+	FString GetLocalizedString(FEffectParametersBase Parameters) const;
+
+	int GetPositiveNegativeIndex(FEffectParametersBase Parameters) const;
 };

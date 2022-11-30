@@ -5,23 +5,26 @@
 
 
 // Sets default values
-AEffectProcessorBase::AEffectProcessorBase() {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
+UEffectProcessorBase::UEffectProcessorBase() {
 }
 
-UStruct* AEffectProcessorBase::GetParametersUStruct() {
+UStruct* UEffectProcessorBase::GetParametersUStruct() {
 	return FEffectParametersBase::StaticStruct();
 }
 
-// Called when the game starts or when spawned
-void AEffectProcessorBase::BeginPlay() {
-	Super::BeginPlay();
+void UEffectProcessorBase::PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) {
 	
 }
 
-void AEffectProcessorBase::PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) {
-	
+FString UEffectProcessorBase::GetLocalizedString(FEffectParametersBase Parameters) {
+	return FString("");
+}
+
+int UEffectProcessorBase::GetPositiveNegativeIndex() {
+	return 0;
+}
+
+FEffectParametersBase UEffectProcessorBase::Deserialize(TSharedRef<FJsonObject> JsonObject) {
+	return FEffectParametersBase();
 }
 

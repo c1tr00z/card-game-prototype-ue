@@ -10,11 +10,17 @@
  * 
  */
 UCLASS(Blueprintable)
-class CARDGAMEPROTOTYPEUE_API AUEffectDamageProcessor : public AEffectProcessorBase {
+class CARDGAMEPROTOTYPEUE_API UEffectDamageProcessor : public UEffectProcessorBase {
 	GENERATED_BODY()
 	
 public:
 	virtual UStruct* GetParametersUStruct() override;
 
 	virtual void PlayEffect(FEffectParametersBase Parameters, ACGPCharacterBase* Target) override;
+
+	virtual FString GetLocalizedString(FEffectParametersBase Parameters) override;
+
+	virtual int GetPositiveNegativeIndex() override;
+
+	virtual FEffectParametersBase Deserialize(TSharedRef<FJsonObject> JsonObject) override;
 };

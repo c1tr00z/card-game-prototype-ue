@@ -21,4 +21,13 @@ private:
 public:
 	UFUNCTION(BlueprintCallable)
 	static void PlayEffect(UWorld* World, FEffectParametersBase Parameters, ACGPCharacterBase* Target);
+
+	//TEMP solution for localization. Will be changed
+	UFUNCTION(BlueprintPure)
+	static FString GetLocalizedString(UWorld* World, FEffectParametersBase Parameters);
+
+	UFUNCTION(BlueprintPure)
+	static int GetPositiveNegativeIndex(UWorld* World, FEffectParametersBase Parameters);
+
+	static FEffectParametersBase DeserializeFromJson(UWorld* World, TSharedRef<FJsonObject> JsonObject);
 };
